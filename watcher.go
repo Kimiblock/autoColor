@@ -39,6 +39,7 @@ func watcher(conf Config) {
 
 func switchTheme(dark bool, config Config) {
 	qtChange(dark, config)
+	setGtk(dark, config)
 }
 
 func isDark(conn *dbus.Conn, portalObj dbus.BusObject) bool {
