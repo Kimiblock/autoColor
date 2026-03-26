@@ -61,13 +61,18 @@ func isDark(conn *dbus.Conn, portalObj dbus.BusObject) bool {
 	switch res {
 		case 0:
 			if os.Getenv("XDG_CURRENT_DESKTOP") == "GNOME" {
+				//logger.Println("Switching default to prefer-light...")
 				cmdarg := []string{
 					"set",
 					"org.gnome.desktop.interface",
 					"color-scheme",
+					"prefer-light",
 				}
 				cmd := exec.Command("gsettings", cmdarg...)
-				cmd.Start()
+				err := cmd.Run()
+				if err != nil {
+					warn.Println("Could not switch default to light:", err)
+				}
 			}
 			return false
 		case 1:
