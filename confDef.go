@@ -1,8 +1,9 @@
 package main
 
 type Config struct {
-	Kvantum		KvConf
-
+	Qt		QtConf
+	Icon		IconConf
+	Gtk		GtkConf
 }
 
 type IconConf struct {
@@ -15,7 +16,7 @@ type GtkConf struct {
 	Theme	ThemeSwitch
 }
 
-type KvConf struct {
+type QtConf struct {
 	Enable	bool
 	Theme	ThemeSwitch
 }
