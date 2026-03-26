@@ -26,11 +26,11 @@ func watcher(conf Config) {
 	conn.Signal(sigChan)
 	var dark bool
 	for sig := range sigChan {
-		logger.Println("Settings changed:", sig.Body)
 		darkStat := isDark(conn, portalObj)
 		if dark == darkStat {
 			continue
 		}
+		logger.Println("Settings changed:", sig.Body)
 		dark = darkStat
 		switchTheme(darkStat, conf)
 	}
