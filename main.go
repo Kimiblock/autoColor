@@ -6,8 +6,8 @@ import (
 )
 
 var (
-	logger = log.New(os.Stdout, "autoColor ", 0)
-	warn = log.New(os.Stderr, "autoColor warning ", 0)
+	logger = log.New(os.Stdout, "[autoColor] ", 0)
+	warn = log.New(os.Stderr, "[autoColor] warning ", 0)
 	confDir, _ = os.UserConfigDir()
 )
 
@@ -21,9 +21,9 @@ func main () {
 	}
 	switch len(args) {
 		case 0, 1:
-			logger.Println("autoColor started with argument:", args)
+			logger.Println("started with argument:", args)
 		default:
-			logger.Println("autoColor started with arguments:", args)
+			logger.Println("started with arguments:", args)
 	}
 
 	conf := cmdline(args)
