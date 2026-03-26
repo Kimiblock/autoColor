@@ -7,10 +7,6 @@ import (
 	"github.com/godbus/dbus/v5"
 )
 
-const (
-	matchRule string = "type='signal',sender='org.freedesktop.portal.Desktop',interface='org.freedesktop.portal.Settings',member='SettingChanged',path='/org/freedesktop/portal/desktop'"
-)
-
 func watcher(conf Config) {
 	conn, err := dbus.SessionBus()
 	if err != nil {
@@ -36,7 +32,7 @@ func watcher(conf Config) {
 }
 
 func switchTheme(dark bool, config Config) {
-
+	qtChange(dark, config)
 }
 
 func isDark(conn *dbus.Conn, portalObj dbus.BusObject) bool {
@@ -64,11 +60,13 @@ func isDark(conn *dbus.Conn, portalObj dbus.BusObject) bool {
 				}
 				cmd := exec.Command("gsettings", cmdarg...)
 				cmd.Start()
-				return false
 			}
+			return false
 		case 1:
 			return true
 		case 2:
+			return false
+		default:
 			return false
 	}
 }
