@@ -24,9 +24,15 @@ func watcher(conf Config) {
 	}
 	sigChan := make(chan *dbus.Signal, 5)
 	conn.Signal(sigChan)
+	var dark bool
 	for sig := range sigChan {
 		logger.Println("Settings changed:", sig.Body)
-		switchTheme(isDark(conn, portalObj), conf)
+		darkStat := isDark(conn, portalObj)
+		if dark == darkStat {
+			continue
+		}
+		dark = darkStat
+		switchTheme(darkStat, conf)
 	}
 
 }
