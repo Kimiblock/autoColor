@@ -7,7 +7,10 @@ import (
 	"strings"
 )
 
-func kvChange(dark bool, conf Config) {
+func qtChange(dark bool, conf Config) {
+	if ! conf.Qt.Enable {
+		return
+	}
 	var theme string
 	switch dark {
 		case true:
